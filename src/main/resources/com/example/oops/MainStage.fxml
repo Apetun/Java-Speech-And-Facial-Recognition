@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oops.VideoController">
+  <center>
+    <ImageView fx:id="VideoOut" fitHeight="400.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="10.0" top="5.0" />
+         </BorderPane.margin></ImageView>
+  </center>
+   <bottom>
+      <Label fx:id="TextOutput" contentDisplay="CENTER" prefHeight="147.0" prefWidth="715.0" text="[Output]" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="43.0" />
+         </font></Label>
+   </bottom>
+   <top>
+      <HBox prefHeight="32.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="start" mnemonicParsing="false" onAction="#startCapture" text="START" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="stop" layoutX="20.0" layoutY="15.0" mnemonicParsing="false" onAction="#stopCapture" text="STOP" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+</BorderPane>

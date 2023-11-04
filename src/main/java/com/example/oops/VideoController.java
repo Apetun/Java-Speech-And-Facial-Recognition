@@ -5,6 +5,7 @@ import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import edu.cmu.sphinx.api.SpeechResult;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -27,6 +28,8 @@ public class VideoController implements Initializable {
     public ImageView VideoOut;
 
     public Label TextOutput;
+    public Button start;
+    public Button stop;
     private VideoCapture capture;
     private boolean capturing = false;
     private final ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -83,55 +86,51 @@ public class VideoController implements Initializable {
         while ((result = recognizer.getResult()) != null) {
             {
                 SpeechResult finalResult = result;
-                Platform.runLater(new Runnable() {
+                Platform.runLater(() -> {
+                    String output;
+                    switch(finalResult.getHypothesis())
+                    {
 
-                    @Override
-                    public void run() {
-                        String output="";
-                        switch(finalResult.getHypothesis())
-                        {
-
-                            case "hello":
-                            case "hi":
-                            case "hey":output="Hello there User";
-                                break;
-                            case "left": output="Moving left";
+                        case "hello":
+                        case "hi":
+                        case "hey":output="Hello there User";
                             break;
-                            case "right":output="Moving right";
-                                break;
-                            case "up":
-                            case "top":output="Moving up";
-                                break;
-                            case "down":
-                            case "bottom":output="Moving down";
-                                break;
-                            case "select":output="Selecting choice";
-                                break;
-                            case "remove":
-                            case "delete":output="Deleting choice";
-                                break;
-                            case "create":output="Creating choice";
-                                break;
-                            case "copy":output="Copying choice";
-                                break;
-                            case "paste":output="Pasting choice";
-                                break;
-                            case "minimize":output="Minimizing window";
-                                ((Stage)(TextOutput.getScene()).getWindow()).setIconified(true);
-                                break;
-                            case "maximize":output="Maximizing window";
-                                ((Stage)(TextOutput.getScene()).getWindow()).setIconified(false);
-                                break;
-                            default:output="";
+                        case "left": output="Moving left";
+                        break;
+                        case "right":output="Moving right";
                             break;
+                        case "up":
+                        case "top":output="Moving up";
+                            break;
+                        case "down":
+                        case "bottom":output="Moving down";
+                            break;
+                        case "select":output="Selecting choice";
+                            break;
+                        case "remove":
+                        case "delete":output="Deleting choice";
+                            break;
+                        case "create":output="Creating choice";
+                            break;
+                        case "copy":output="Copying choice";
+                            break;
+                        case "paste":output="Pasting choice";
+                            break;
+                        case "minimize":output="Minimizing window";
+                            ((Stage)(TextOutput.getScene()).getWindow()).setIconified(true);
+                            break;
+                        case "maximize":output="Maximizing window";
+                            ((Stage)(TextOutput.getScene()).getWindow()).setIconified(false);
+                            break;
+                        default:output="";
+                        break;
 
-                        }
-
-
-
-
-                        TextOutput.setText(output);
                     }
+
+
+
+
+                    TextOutput.setText(output);
                 });
 
 
